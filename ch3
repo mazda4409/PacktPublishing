@@ -1,8 +1,8 @@
-// Install active directory via PowerShell
+// Install Active Directory via PowerShell
 Install-windowsfeature AD-domain-services
 Import-Module ADDSDeployment
 Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\\Windows\\NTDS" -DomainMode "7" -DomainName "cs.org" -DomainNetbiosName "cs" -ForestMode "7" -InstallDns:$true -LogPath "C:\\Windows\\NTDS" -NoRebootOnCompletion:$false -SysvolPath "C:\\Windows\\SYSVOL" -Force:$true
-// Vulnerable AD-Script
+// Vulnerable AD-Script to run AFTER installing Active Directory
 IEX((new-object net.webclient).downloadstring("https://raw.githubusercontent.com/wazehell/vulnerable-AD/master/vulnad.ps1"));
 Invoke-VulnAD -UsersLimit 100 -DomainName "cs.org"
 
